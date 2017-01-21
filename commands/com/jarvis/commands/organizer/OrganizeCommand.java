@@ -10,6 +10,7 @@ import com.jarvis.utils.Logger.Level;
 public class OrganizeCommand extends Command {
 
 	// CHECK [OrganizeCommand] check for bugs
+	// TODO create FormatMappingSets for different Folders to choose
 	public OrganizeCommand() {
 		super("organize");
 	}
@@ -44,6 +45,12 @@ public class OrganizeCommand extends Command {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public String[] getHelp() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

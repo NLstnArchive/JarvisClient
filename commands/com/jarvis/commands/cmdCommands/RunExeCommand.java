@@ -65,4 +65,9 @@ public class RunExeCommand extends Command {
 		}
 
 	}
+
+	public String[] getHelp() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

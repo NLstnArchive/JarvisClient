@@ -2,11 +2,11 @@ package com.jarvis.commands;
 
 public abstract class Command {
 
-	private String name;
+	private String		name;
 
-	private String[] subNames;
+	private String[]	subNames;
 
-	protected Object[] args;
+	protected Object[]	args;
 
 	public Command(String name, String... subNames) {
 		this.name = name;
@@ -39,6 +39,8 @@ public abstract class Command {
 	public abstract boolean checkArgs();
 
 	public abstract Runnable compile();
+
+	public abstract String[] getHelp();
 
 	protected boolean isString(Object object) {
 		return object instanceof String;

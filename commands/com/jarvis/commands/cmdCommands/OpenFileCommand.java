@@ -58,4 +58,8 @@ public class OpenFileCommand extends Command {
 		}
 	}
 
+	public String[] getHelp() {
+		return new String[] { "Opens the file specified with the os default program.", "Opens the file specified by the path translated by Jarvis' FileSystem in the default program for the datatype of the os" };
+	}
+
 }

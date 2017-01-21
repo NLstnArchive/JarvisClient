@@ -1,17 +1,15 @@
 package com.jarvis.commands.cmdCommands;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import com.jarvis.commands.Command;
 import com.jarvis.utils.Logger;
 import com.jarvis.utils.Logger.Level;
-import com.jarvis.utils.StreamGobbler;
 
 public class CmdCommand extends Command {
-
-	public CmdCommand(String name) {
-		super(name);
-	}
 
 	public CmdCommand() {
 		super("cmd");
@@ -32,11 +30,14 @@ public class CmdCommand extends Command {
 						e.printStackTrace();
 						return;
 					}
-					StreamGobbler infoGobbler = new StreamGobbler(p.getInputStream());
-					StreamGobbler errorGobbler = new StreamGobbler(p.getErrorStream());
-
-					infoGobbler.start();
-					errorGobbler.start();
+					try {
+						handleInput(p.getInputStream());
+						handleInput(p.getErrorStream());
+					}
+					catch (IOException e) {
+						Logger.error("Failed to receive Input from Process: " + args[0], Level.LVL1);
+						return;
+					}
 
 					Logger.info("Successfully issued command!", Level.LVL1);
 				}
@@ -46,6 +47,16 @@ public class CmdCommand extends Command {
 			e.printStackTrace();
 		}
 		return runnable;
+	}
+
+	private void handleInput(InputStream stream) throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+
+		String line = "";
+		while ((line = reader.readLine()) != null) {
+			Logger.info(line, Level.LVL1);
+		}
+		reader.close();
 	}
 
 	public boolean checkArgs() {
@@ -60,5 +71,9 @@ public class CmdCommand extends Command {
 			Logger.error("Command " + getName() + " requires a String array as argument", Level.LVL1);
 			return false;
 		}
+	}
+
+	public String[] getHelp() {
+		return new String[] { "Usage: cmd <command>", "Executes a standard windows command and outputs the result to the jarvis console." };
 	}
 }

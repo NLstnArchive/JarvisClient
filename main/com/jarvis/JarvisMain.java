@@ -9,18 +9,20 @@ import com.jarvis.net.NetModule;
 import com.jarvis.services.ServiceModule;
 import com.jarvis.utils.Logger;
 import com.jarvis.utils.Logger.Level;
+import com.jarvis.utils.UtilsModule;
 
 public class JarvisMain {
 
-	public static final String version = "pre-alpha";
+	public static final String		version	= "pre-alpha";
 
-	private static SuperThreadPool commonThreadPool;
+	private static SuperThreadPool	commonThreadPool;
 
-	private static InputModule inputModule;
-	private static CommandModule commandModule;
-	private static DataModule dataModule;
-	private static ServiceModule serviceModule;
-	private static NetModule netModule;
+	private static InputModule		inputModule;
+	private static CommandModule	commandModule;
+	private static DataModule		dataModule;
+	private static ServiceModule	serviceModule;
+	private static NetModule		netModule;
+	private static UtilsModule		utilsModule;
 
 	private JarvisMain() {
 
@@ -40,6 +42,8 @@ public class JarvisMain {
 		dataModule.preInit();
 		netModule = new NetModule();
 		netModule.preInit();
+		utilsModule = new UtilsModule();
+		utilsModule.preInit();
 	}
 
 	// initialize all modules
@@ -60,6 +64,9 @@ public class JarvisMain {
 		dataModule.init();
 		Logger.info("Finished setting up DataModule", Level.LVL3);
 		netModule.init();
+		Logger.info("Setting up UtilsModule", Level.LVL1);
+		utilsModule.init();
+		Logger.info("Finished setting up UtilsModule", Level.LVL1);
 	}
 
 	private static void postInit() {
@@ -68,6 +75,7 @@ public class JarvisMain {
 		serviceModule.postInit();
 		dataModule.postInit();
 		netModule.postInit();
+		utilsModule.postInit();
 	}
 
 	public static InputModule getInputModule() {
@@ -94,6 +102,10 @@ public class JarvisMain {
 		return netModule;
 	}
 
+	public static UtilsModule getUtilsModule() {
+		return utilsModule;
+	}
+
 	public static void shutdown() {
 		Logger.info("Shutting down Jarvis", Level.LVL1);
 		inputModule.shutDown();
@@ -101,6 +113,7 @@ public class JarvisMain {
 		serviceModule.shutDown();
 		dataModule.shutDown();
 		netModule.shutDown();
+		utilsModule.shutDown();
 		commonThreadPool.joinAll();
 		Logger.info("Finished shutting down Jarvis. Goodbye!", Level.LVL1);
 		Logger.close();
