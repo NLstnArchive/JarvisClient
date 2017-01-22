@@ -35,17 +35,14 @@ public class MountFolderShortcutCommand extends Command {
 					FileSystem.mount((String) args[0], (String) args[1]);
 				}
 			};
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 
 		}
 		return runnable;
 	}
 
-	@Override
 	public String[] getHelp() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] { "Usage: mount <shortCut> <localPath>", "Mounts the specified <localPath> to the <shortCut> being used by the FileSystem to translate paths." };
 	}
 
 }

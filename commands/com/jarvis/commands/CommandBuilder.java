@@ -25,9 +25,9 @@ import com.jarvis.utils.Logger.Level;
 
 public class CommandBuilder {
 
-	private List<Command> commands = new ArrayList<Command>();
+	private List<Command>	commands	= new ArrayList<Command>();
 
-	private List<String> subNames = new ArrayList<String>();
+	private List<String>	subNames	= new ArrayList<String>();
 
 	public void init() {
 		registerCommand(new RunExeCommand());
@@ -58,8 +58,7 @@ public class CommandBuilder {
 		if (invalid) {
 			Logger.error("Failed to register Command " + command.getName() + ", NameConflictError!", Level.LVL1);
 			return;
-		}
-		else {
+		} else {
 			commands.add(command);
 		}
 	}
@@ -75,11 +74,13 @@ public class CommandBuilder {
 			cmd.setArgs(args);
 			if (cmd.checkArgs())
 				return cmd.compile();
-			else
+			else {
+				for (String message : cmd.getHelp())
+					Logger.info(message, Level.LVL1);
 				return null;
+			}
 
-		}
-		else
+		} else
 			return null;
 	}
 }

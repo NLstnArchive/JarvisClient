@@ -36,17 +36,14 @@ public class UnmountFolderShortcutCommand extends Command {
 						Logger.info("No FolderShortcut found for key " + key, Level.LVL1);
 				}
 			};
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Logger.error("Failed to compile runnable for command " + getName() + "!", Level.LVL1);
 		}
 		return runnable;
 	}
 
-	@Override
 	public String[] getHelp() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] { "Usage: unmount <shortCut> <localPath>", "Unmounts the specified <localPath> from the <shortCut>" };
 	}
 
 }

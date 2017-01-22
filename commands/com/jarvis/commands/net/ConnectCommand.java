@@ -28,10 +28,8 @@ public class ConnectCommand extends Command {
 		return r;
 	}
 
-	@Override
 	public String[] getHelp() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] { "Usage: connect", "Connects this client the specified JarvisServer" };
 	}
 
 }

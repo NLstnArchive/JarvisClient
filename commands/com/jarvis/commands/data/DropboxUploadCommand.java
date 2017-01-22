@@ -14,7 +14,6 @@ public class DropboxUploadCommand extends Command {
 		super("dbxUpload");
 	}
 
-	// FUTURE [DropboxUploadCommand][Easy] accept file as first argument.
 	public Runnable compile() {
 		Runnable runnable = null;
 		try {
@@ -27,8 +26,7 @@ public class DropboxUploadCommand extends Command {
 						Logger.info("Uploaded File " + sourceFile + " to " + (String) args[1], Level.LVL1);
 				}
 			};
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Logger.error("Failed to compile Command " + getName(), Level.LVL1);
 		}
 		return runnable;
@@ -42,8 +40,7 @@ public class DropboxUploadCommand extends Command {
 		String sourceFile = null;
 		try {
 			sourceFile = (String) args[0];
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Logger.error("Command " + getName() + " requires Strings as first argument!", Level.LVL1);
 			return false;
 		}
@@ -60,9 +57,7 @@ public class DropboxUploadCommand extends Command {
 		}
 	}
 
-	@Override
 	public String[] getHelp() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] { "Usage: dbxUpload <localPath> <remotePath>", "Uploads the file specified by the <localpath>, which gets translated by Jarvis' FileSystem, ", " to the <remotePath> in the dropbox." };
 	}
 }

@@ -28,10 +28,8 @@ public class DisconnectCommand extends Command {
 		return r;
 	}
 
-	@Override
 	public String[] getHelp() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] { "Usage: disconnect", "Disconnects this client from the specified JarvisServer" };
 	}
 
 }

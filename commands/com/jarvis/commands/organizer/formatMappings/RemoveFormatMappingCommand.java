@@ -38,17 +38,14 @@ public class RemoveFormatMappingCommand extends Command {
 					Logger.info("Successfully removed mapping: " + arg + "->" + value + ".", Level.LVL1);
 				}
 			};
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Logger.error("Failed to compile runnable! " + e.getMessage(), Level.LVL1);
 		}
 		return runnable;
 	}
 
-	@Override
 	public String[] getHelp() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] { "Usage: removeFormatMapping <format> <folder>", "Removes this mapping from the active formatMappingsList" };
 	}
 
 }

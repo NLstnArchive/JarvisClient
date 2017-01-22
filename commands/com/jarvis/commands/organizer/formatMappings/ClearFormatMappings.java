@@ -32,27 +32,22 @@ public class ClearFormatMappings extends Command {
 					if (answer.equalsIgnoreCase("yes")) {
 						DataPool.getOrganizerFormatMappings().clear();
 						Logger.info("Successfully cleared OrganizerFormatMappings.", Level.LVL1);
-					}
-					else if (answer.equalsIgnoreCase("no")) {
+					} else if (answer.equalsIgnoreCase("no")) {
 						return;
-					}
-					else {
+					} else {
 						Logger.error("Unexpected input: " + answer, Level.LVL1);
 						return;
 					}
 				}
 			};
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Logger.error("Failed to compile runnable! " + e.getMessage(), Level.LVL1);
 		}
 		return runnable;
 	}
 
-	@Override
 	public String[] getHelp() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] { "Usage: clearFormatMappings", "Clears all formatMappings" };
 	}
 
 }

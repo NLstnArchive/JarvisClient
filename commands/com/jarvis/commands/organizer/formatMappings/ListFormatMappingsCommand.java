@@ -35,10 +35,8 @@ public class ListFormatMappingsCommand extends Command {
 		return runnable;
 	}
 
-	@Override
 	public String[] getHelp() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] { "Usage: listFormatMappings", "Lists all active formatMappings" };
 	}
 
 }

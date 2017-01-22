@@ -36,17 +36,14 @@ public class SetLoggerLevelCommand extends Command {
 					Logger.info("Changed logger level to " + args[0], Level.LVL1);
 				}
 			};
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Logger.error("Failed to compile Runnable for Command " + getName(), Level.LVL1);
 		}
 		return runnable;
 	}
 
-	@Override
 	public String[] getHelp() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] { "Usage: setLoggerLevel <level>", "Sets the logger level" };
 	}
 
 }

@@ -28,18 +28,15 @@ public class ShutdownCommand extends Command {
 					JarvisMain.shutdown();
 				}
 			};
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Logger.error("Failed to compile Runnable for Command " + getName() + ": " + e.getMessage(), Level.LVL1);
 			return null;
 		}
 		return runnable;
 	}
 
-	@Override
 	public String[] getHelp() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] { "Usage: shutdown", "Shuts down Jarvis" };
 	}
 
 }

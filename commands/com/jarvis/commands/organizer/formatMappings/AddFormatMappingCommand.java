@@ -48,17 +48,14 @@ public class AddFormatMappingCommand extends Command {
 					Logger.info("Succesfully added new FormatMapping: " + arg1 + "->" + arg2, Level.LVL1);
 				}
 			};
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Logger.error("Failed to compile runnable! " + e.getMessage(), Level.LVL1);
 		}
 		return runnable;
 	}
 
-	@Override
 	public String[] getHelp() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] { "Usage: addFormatMapping <format> <folder>", "Adds this mapping to the formatMappingsList" };
 	}
 
 }

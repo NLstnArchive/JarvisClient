@@ -11,7 +11,7 @@ public class InfoCommand extends Command {
 		super("info");
 	}
 
-	// FUTURE [InfoCommand] implement more info commands. rename this one to HeapSpaceInfo.
+	// TODO [InfoCommand] implement more info commands. rename this one to HeapSpaceInfo.
 	public Runnable compile() {
 		Runnable runnable = null;
 		try {
@@ -20,8 +20,7 @@ public class InfoCommand extends Command {
 					Logger.info((String) JarvisMain.getServiceModule().getServiceManager().getResultOfService("HeapSpaceInfo"), Level.LVL1);
 				}
 			};
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return runnable;
@@ -35,9 +34,7 @@ public class InfoCommand extends Command {
 		return true;
 	}
 
-	@Override
 	public String[] getHelp() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] { "Usage: info", "Currently prints Heapspaceinfo" };
 	}
 }

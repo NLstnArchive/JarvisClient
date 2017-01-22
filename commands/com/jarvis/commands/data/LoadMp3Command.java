@@ -42,18 +42,15 @@ public class LoadMp3Command extends Command {
 					new Mp3AudioFile((String) args[0]);
 				}
 			};
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Logger.error("Failed to compile Runnable!", Level.LVL1);
 			return null;
 		}
 		return runnable;
 	}
 
-	@Override
 	public String[] getHelp() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] { "Usage: loadMp3 <localPath>", "Loads the file specified by <localPath> into memory and asks for possibly missing ID3 information, which get saved in this file.", "This Command should be used to supply ID3 information for MP3 files", "BUG: new ID3 tags are not visible in Windows Explorer, however Jarvis can read them." };
 	}
 
 }

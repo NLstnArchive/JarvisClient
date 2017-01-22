@@ -9,7 +9,6 @@ import com.jarvis.utils.Logger.Level;
 
 public class OrganizeCommand extends Command {
 
-	// CHECK [OrganizeCommand] check for bugs
 	// TODO create FormatMappingSets for different Folders to choose
 	public OrganizeCommand() {
 		super("organize");
@@ -24,8 +23,7 @@ public class OrganizeCommand extends Command {
 					JarvisMain.getDataModule().getOrganizer().organizeFolder(folder);
 				}
 			};
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			Logger.error("Failed to compile Runnable for Command " + getName(), Level.LVL1);
 		}
 		return runnable;
@@ -47,10 +45,8 @@ public class OrganizeCommand extends Command {
 		return true;
 	}
 
-	@Override
 	public String[] getHelp() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] { "Usage: organize <localPath>", "Organizes the folder specified by <localPath>. It scans all files in the folder and it's subfolders for datatypes specified in the format mappings and moves them in the mapped folders. Subfolders of <localPath>, that are empty after the organizing, get deleted", "BUGS: Sometimes some folders that are empty after the organizing don't get deleted." };
 	}
 
 }
