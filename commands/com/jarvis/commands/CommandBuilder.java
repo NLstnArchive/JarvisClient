@@ -10,7 +10,6 @@ import com.jarvis.commands.data.DropboxUploadCommand;
 import com.jarvis.commands.data.LoadMp3Command;
 import com.jarvis.commands.data.MountFolderShortcutCommand;
 import com.jarvis.commands.data.UnmountFolderShortcutCommand;
-import com.jarvis.commands.info.InfoCommand;
 import com.jarvis.commands.net.ConnectCommand;
 import com.jarvis.commands.net.DisconnectCommand;
 import com.jarvis.commands.organizer.OrganizeCommand;
@@ -33,7 +32,6 @@ public class CommandBuilder {
 		registerCommand(new RunExeCommand());
 		registerCommand(new CmdCommand());
 		registerCommand(new OpenFileCommand());
-		registerCommand(new InfoCommand());
 		registerCommand(new DropboxUploadCommand());
 		registerCommand(new ShutdownCommand());
 		registerCommand(new AddFormatMappingCommand());
@@ -58,7 +56,8 @@ public class CommandBuilder {
 		if (invalid) {
 			Logger.error("Failed to register Command " + command.getName() + ", NameConflictError!", Level.LVL1);
 			return;
-		} else {
+		}
+		else {
 			commands.add(command);
 		}
 	}
@@ -80,7 +79,8 @@ public class CommandBuilder {
 				return null;
 			}
 
-		} else
+		}
+		else
 			return null;
 	}
 }
