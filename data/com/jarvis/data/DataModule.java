@@ -9,11 +9,10 @@ import com.jarvis.data.files.Organizer;
 
 public class DataModule extends JarvisModule {
 
-	private DataPool dataPool;
-	private DropboxHandler dropbox;
-	private Organizer organizer;
+	private DropboxHandler			dropbox;
+	private Organizer				organizer;
 
-	private static List<Cleanable> cleanables = new ArrayList<Cleanable>();
+	private static List<Cleanable>	cleanables	= new ArrayList<Cleanable>();
 
 	public DataModule() {
 		super("DataModule");
@@ -45,10 +44,6 @@ public class DataModule extends JarvisModule {
 
 	public void shutDown() {
 		DataPool.save();
-	}
-
-	public DataPool getDataPool() {
-		return dataPool;
 	}
 
 	public Organizer getOrganizer() {
