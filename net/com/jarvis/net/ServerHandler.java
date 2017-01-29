@@ -5,6 +5,8 @@ import java.net.UnknownHostException;
 
 import com.jarvis.net.files.FileHandler;
 import com.jarvis.net.files.FileSendRequest;
+import com.jarvis.net.packets.Message;
+import com.jarvis.net.packets.Message.MessageType;
 import com.jarvis.net.sockets.FileSocketHandler;
 import com.jarvis.net.sockets.MessageSocketHandler;
 import com.jarvis.utils.Logger;
@@ -14,10 +16,9 @@ public class ServerHandler {
 
 	// TODO need a way to filter all received messages for the right one!
 
-	static final String				PREFIX_CONNECT		= "/c/";
-	static final String				PREFIX_DISCONNECT	= "/dc/";
-	static final String				PREFIX_FILE			= "/f/";
-	static final String				PREFIX_FILE_INFO	= "/fi/";
+	static final Message			PREFIX_CONNECT		= new Message(MessageType.CONNECTION, "");
+	static final Message			PREFIX_DISCONNECT	= new Message(MessageType.DISCONNECTION, "");
+	static final Message			PREFIX_FILE_INFO	= new Message(MessageType.FILE_INFO, "");
 
 	private volatile boolean		connected			= false;
 
@@ -39,15 +40,15 @@ public class ServerHandler {
 	public boolean connect() {
 		messageSocket = new MessageSocketHandler();
 		connected = true;
-		String connectionMessage = new String(messageSocket.receiveMessage());
-		if (!connectionMessage.startsWith(PREFIX_CONNECT)) {
+		Message connectionMessage = messageSocket.receiveMessage();
+		if (!connectionMessage.getTypePrefix().startsWith("c/")) {
 			Logger.error("Received invalid connection message! " + connectionMessage, Level.LVL1);
 			connected = false;
 			return false;
 		}
 		int id = 0;
 		try {
-			id = Integer.parseInt(connectionMessage.split("/")[2]);
+			id = Integer.parseInt(connectionMessage.getContent().split("/")[2]);
 		} catch (Exception e) {
 			Logger.error("Failed to read UUID from packet: " + connectionMessage, Level.LVL1);
 			return false;
@@ -67,16 +68,16 @@ public class ServerHandler {
 		fileHandler.submitFileSendRequest(request);
 	}
 
-	public void send(String message) {
+	public void send(Message message) {
 		messageSocket.sendMessage(message);
 	}
 
 	public void disconnect() {
 		Logger.info("Disconnecting from Server...", Level.LVL1);
 		messageSocket.sendMessage(PREFIX_DISCONNECT);
-		String answer = messageSocket.receiveMessage();
+		Message answer = messageSocket.receiveMessage();
 		connected = false;
-		if (!answer.equals("/dc/")) {
+		if (!answer.getTypePrefix().equals("dc/")) {
 			Logger.error("Invalid disconnect answer from server! " + answer, Level.LVL1);
 			messageSocket.close();
 			fileSocket.close();
