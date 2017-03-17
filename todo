@@ -1,0 +1,5 @@
+TODO:
+
+Divide server + client modules into seperate jars, handled by a master and communicating via local sockets.
+
+Master Module needs more control on how to manage and share Tasks with the module that is in charge of it.
